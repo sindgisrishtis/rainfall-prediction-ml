@@ -251,39 +251,43 @@ The same time-aware splitting strategy was used when comparing the regression mo
 
 The complete machine learning pipeline follows a chronological workflow from raw meteorological data to rainfall prediction.
 
-flowchart TD
-    A["🌦️ Raw Meteorological Data"] --> B["🧹 Data Cleaning & Validation"]
-    B --> C["📊 Exploratory Data Analysis"]
-    C --> D["🔧 Feature Engineering"]
-
-    D --> D1["Rainfall Lag Features"]
-    D --> D2["Rolling Rainfall Features"]
-    D --> D3["Rainfall Change"]
-    D --> D4["Rainfall Intensity"]
-    D --> D5["Temperature–Dew Point Difference"]
-
-    D1 --> E["📅 Chronological Train / Test Split"]
-    D2 --> E
-    D3 --> E
-    D4 --> E
-    D5 --> E
-
-    E --> F["🤖 Model Training"]
-
-    F --> F1["Decision Tree"]
-    F --> F2["Random Forest"]
-    F --> F3["SVR"]
-    F --> F4["XGBoost"]
-
-    F1 --> G["📈 Model Evaluation"]
-    F2 --> G
-    F3 --> G
-    F4 --> G
-
-    G --> H["🏆 Best Model Selection"]
-    H --> I["XGBoost"]
-    I --> J["💾 Saved Model"]
-    J --> K["🌐 Streamlit Deployment"]
+```text
+Raw Meteorological Data
+          ↓
+Data Cleaning & Validation
+          ↓
+Exploratory Data Analysis
+          ↓
+Feature Engineering
+          ↓
+Chronological Train / Test Split
+          ↓
+Model Training
+          ↓
+     ┌────┬────┬────┐
+     ↓    ↓    ↓    ↓
+Decision Random  SVR XGBoost
+ Tree   Forest
+     ↓    ↓    ↓    ↓
+     └────┴────┴────┘
+          ↓
+Model Evaluation
+          ↓
+Model Comparison
+          ↓
+Best Model Selection
+          ↓
+XGBoost Regressor
+          ↓
+Model Serialization
+          ↓
+rainfall_prediction_model.pkl
+          ↓
+Streamlit Application
+          ↓
+Rainfall Prediction
+```
+---
 
 ## 🤖 Models Evaluated
 
