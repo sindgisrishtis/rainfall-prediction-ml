@@ -94,3 +94,86 @@ The trained model is serialized using **Joblib** and integrated into a **Streaml
 - 🌐 Interactive Streamlit prediction interface
 - 🚀 Deployed using Streamlit Community Cloud
 - 📁 Organized repository structure for reproducibility
+
+---
+
+## 📊 Dataset
+
+The project uses daily meteorological observations containing atmospheric, temperature, humidity, wind, radiation, soil-moisture, and precipitation variables.
+
+### Dataset Information
+
+| Property | Details |
+|---|---|
+| **Time Period** | 1995–2025 |
+| **Temporal Resolution** | Daily |
+| **Location** | Latitude 18.8209, Longitude 98.9899 |
+| **Target Variable** | `PRECTOTCORR` |
+| **Prediction Task** | Daily rainfall regression |
+
+### Meteorological Variables
+
+| Feature | Description |
+|---|---|
+| `ALLSKY_SFC_SW_DWN` | All-sky surface shortwave downward irradiance |
+| `ALLSKY_SFC_SW_DNI` | All-sky surface direct normal irradiance |
+| `T2M` | Temperature at 2 meters |
+| `T2MDEW` | Dew-point temperature |
+| `T2MWET` | Wet-bulb related temperature variable |
+| `T2M_MAX` | Maximum temperature |
+| `T2M_MIN` | Minimum temperature |
+| `PRECTOTCORR` | Corrected precipitation / rainfall |
+| `RH2M` | Relative humidity |
+| `QV2M` | Specific humidity |
+| `WS2M` | Wind speed |
+| `GWETTOP` | Top-layer soil wetness |
+
+---
+
+## 🧹 Data Cleaning & Preprocessing
+
+The raw meteorological data was prepared before performing feature engineering and model training.
+
+The preprocessing workflow included:
+
+- Loading and structuring the raw meteorological dataset
+- Handling the dataset's header and metadata structure
+- Selecting relevant numerical variables
+- Checking data types and dataset consistency
+- Checking for missing values
+- Sorting observations chronologically
+- Preparing the rainfall target variable
+- Creating the cleaned modeling dataset
+- Removing observations affected by lag and rolling-window feature generation
+
+The cleaned dataset is maintained at:
+
+`data/cleaned_rainfall_dataset.csv`
+
+The preprocessing stage ensures that the data used for model development is structured, chronological, and suitable for downstream feature engineering and regression modeling.
+
+---
+
+## 📈 Exploratory Data Analysis
+
+Exploratory Data Analysis was performed to understand the statistical and temporal characteristics of rainfall before model training.
+
+The analysis focused on:
+
+- Rainfall distribution
+- Rainfall trends over time
+- Monthly rainfall seasonality
+- Variability in rainfall
+- Relationships between meteorological variables
+- Correlation patterns
+- Distribution of important weather variables
+
+### 🌦️ Rainfall Seasonality
+
+Monthly rainfall distributions were analyzed to identify seasonal patterns and differences in rainfall behavior across the year.
+
+This analysis helps establish the importance of temporal information when modeling rainfall and provides a foundation for the subsequent feature-engineering stage.
+
+EDA visualizations and project screenshots are available in the `assets/` directory.
+
+---
