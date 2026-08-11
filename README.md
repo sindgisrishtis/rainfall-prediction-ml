@@ -249,73 +249,41 @@ The same time-aware splitting strategy was used when comparing the regression mo
 
 ## 🧠 ML Architecture & Workflow
 
-The complete machine learning pipeline follows these stages:
+The complete machine learning pipeline follows a chronological workflow from raw meteorological data to rainfall prediction.
 
-**Raw Meteorological Data**
+flowchart TD
+    A["🌦️ Raw Meteorological Data"] --> B["🧹 Data Cleaning & Validation"]
+    B --> C["📊 Exploratory Data Analysis"]
+    C --> D["🔧 Feature Engineering"]
 
-↓
+    D --> D1["Rainfall Lag Features"]
+    D --> D2["Rolling Rainfall Features"]
+    D --> D3["Rainfall Change"]
+    D --> D4["Rainfall Intensity"]
+    D --> D5["Temperature–Dew Point Difference"]
 
-**Data Cleaning & Validation**
+    D1 --> E["📅 Chronological Train / Test Split"]
+    D2 --> E
+    D3 --> E
+    D4 --> E
+    D5 --> E
 
-↓
+    E --> F["🤖 Model Training"]
 
-**Exploratory Data Analysis**
+    F --> F1["Decision Tree"]
+    F --> F2["Random Forest"]
+    F --> F3["SVR"]
+    F --> F4["XGBoost"]
 
-↓
+    F1 --> G["📈 Model Evaluation"]
+    F2 --> G
+    F3 --> G
+    F4 --> G
 
-**Feature Engineering**
-
-- Rainfall lag features
-- Rolling rainfall features
-- Rainfall change
-- Rainfall intensity
-- Temperature–dew point difference
-
-↓
-
-**Chronological Train/Test Split**
-
-↓
-
-**Model Training**
-
-- Decision Tree
-- Random Forest
-- SVR
-- XGBoost
-
-↓
-
-**Model Evaluation**
-
-- R² Score
-- RMSE
-- MAE
-- MSE
-
-↓
-
-**Model Comparison & Final Model Selection**
-
-↓
-
-**Feature Importance & Error Analysis**
-
-↓
-
-**Joblib Model Serialization**
-
-↓
-
-**Streamlit Inference Application**
-
-↓
-
-**Streamlit Community Cloud Deployment**
-
-This architecture separates data preparation, feature engineering, model development, evaluation, and inference into a clear end-to-end machine learning workflow.
-
----
+    G --> H["🏆 Best Model Selection"]
+    H --> I["XGBoost"]
+    I --> J["💾 Saved Model"]
+    J --> K["🌐 Streamlit Deployment"]
 
 ## 🤖 Models Evaluated
 
