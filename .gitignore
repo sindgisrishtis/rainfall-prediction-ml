@@ -1,22 +1,21 @@
-# Python
-__pycache__/
-*.pyc
-*.pyo
-*.pyd
-
-# Virtual environment
 venv/
-.env
+.venv/
+env/
 
-# Jupyter
+__pycache__/
+*.py[cod]
 .ipynb_checkpoints/
 
-# Mac
 .DS_Store
 
-# Model checkpoints
-*.h5
-*.pt
+.env
+.env.*
+.streamlit/secrets.toml
 
-# Logs
-logs/
+.vscode/
+.idea/
+
+*.tmp
+*.log
+*.swp
+*.swo

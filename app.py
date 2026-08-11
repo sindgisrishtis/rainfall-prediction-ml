@@ -5,6 +5,7 @@ import plotly.express as px
 import plotly.graph_objects as go
 from plotly.subplots import make_subplots
 import os
+import joblib
 
 # ── Page Config ──────────────────────────────────────────────
 st.set_page_config(
@@ -166,8 +167,30 @@ st.markdown("""
 """, unsafe_allow_html=True)
 
 # ── Helper: load CSVs ──────────────────────────────────────────
-OUTPUTS = "outputs"
+BASE_DIR = os.path.dirname(os.path.abspath(__file__))
+OUTPUTS = os.path.join(BASE_DIR, "outputs")
 
+MODEL_PATH = os.path.join(
+    BASE_DIR,
+    "models",
+    "rainfall_prediction_model.pkl"
+)
+
+
+@st.cache_resource
+def load_model():
+    if os.path.exists(MODEL_PATH):
+        return joblib.load(MODEL_PATH)
+    return None
+
+
+model = load_model()
+
+if model is None:
+    st.error("❌ Rainfall prediction model not found.")
+else:
+    st.success("✅ Rainfall prediction model loaded successfully.")
+    
 @st.cache_data
 def load_cleaned_data():
     path = os.path.join(OUTPUTS, "cleaned_rainfall_dataset.csv")
@@ -681,48 +704,88 @@ elif page == "🔍 Live Prediction":
 
     st.markdown("---")
     if st.button("🌧️ Predict Rainfall", type="primary"):
-        # Simplified heuristic prediction (since model pkl is not loaded)
-        # This mimics XGBoost's feature weightings from importance scores
-        pred = (
-            0.301 * rain_lag1 +
-            0.198 * rain_rolling3 +
-            0.142 * rain_lag2 +
-            0.108 * rain_rolling7 +
-            0.072 * rain_intensity * 5 +
-            0.059 * rain_lag3 +
-            0.041 * abs(rain_change) +
-            0.029 * (rh2m / 100) * 3 +
-            0.018 * gwettop * 2 +
-            0.012 * max(0, t2mdew - 15) * 0.5
-        )
-        pred = max(0, pred * 1.1)  # calibration factor
 
-        st.markdown("---")
-        if pred < 0.5:
-            label, color = "No Rain / Trace", "#437a22"
-        elif pred < 2.5:
-            label, color = "Light Rain", "#006494"
-        elif pred < 7.5:
-            label, color = "Moderate Rain", "#01696f"
-        elif pred < 15:
-            label, color = "Heavy Rain", "#da7101"
+        if model is None:
+            st.error("❌ XGBoost model could not be loaded.")
         else:
-            label, color = "Very Heavy Rain", "#a12c7b"
 
-        c1, c2, c3 = st.columns(3)
-        c1.metric("Predicted Rainfall", f"{pred:.2f} mm")
-        c2.metric("Rain Category", label)
-        c3.metric("Confidence", "~High" if rain_lag1 > 0 else "~Moderate")
+            # Exact feature order used during model training
+            MODEL_FEATURES = [
+                "RH2M",
+                "GWETTOP",
+                "T2MDEW",
+                "T2M_MIN",
+                "WS2M",
+                "RAIN_LAG1",
+                "RAIN_LAG2",
+                "RAIN_LAG3",
+                "RAIN_ROLLING3",
+                "RAIN_ROLLING7",
+                "RAIN_CHANGE",
+                "RAIN_INTENSITY",
+                "TEMP_DEW_DIFF"
+            ]
 
-        st.markdown(f"""
-        <div style="background:{color};color:white;padding:1rem 1.5rem;
-             border-radius:10px;font-size:1.1rem;font-weight:600;margin-top:1rem;">
-            🌧️ Forecast: {label} — {pred:.2f} mm expected
-        </div>
-        """, unsafe_allow_html=True)
+            # Create input DataFrame in the exact order expected by XGBoost
+            input_data = pd.DataFrame([[
+                rh2m,
+                gwettop,
+                t2mdew,
+                t2m_min,
+                ws2m,
+                rain_lag1,
+                rain_lag2,
+                rain_lag3,
+                rain_rolling3,
+                rain_rolling7,
+                rain_change,
+                rain_intensity,
+                temp_dew_diff
+            ]], columns=MODEL_FEATURES)
 
-        st.markdown("""
-        > ⚠️ **Note:** This is a feature-weighted heuristic approximation.
-        > For exact XGBoost predictions, save the trained model as `models/xgboost_model.pkl`
-        > and load it here with `joblib.load("models/xgboost_model.pkl")`.
-        """)
+            try:
+                # Actual trained XGBoost prediction
+                prediction = model.predict(input_data)
+
+                pred = max(0.0, float(prediction[0]))
+
+                # Rainfall category
+                if pred < 0.5:
+                    label = "No Rain / Trace"
+                elif pred < 2.5:
+                    label = "Light Rain"
+                elif pred < 7.5:
+                    label = "Moderate Rain"
+                elif pred < 15:
+                    label = "Heavy Rain"
+                else:
+                    label = "Very Heavy Rain"
+
+                st.markdown("---")
+
+                c1, c2 = st.columns(2)
+
+                c1.metric(
+                    "Predicted Rainfall",
+                    f"{pred:.2f} mm"
+                )
+
+                c2.metric(
+                    "Rain Category",
+                    label
+                )
+
+                st.success(
+                    f"🌧️ XGBoost Forecast: **{label}** — "
+                    f"**{pred:.2f} mm** expected"
+                )
+
+                with st.expander("🔍 View Model Input Features"):
+                    st.dataframe(
+                        input_data,
+                        use_container_width=True,
+                        hide_index=True
+                    )
+
+            except Exception as e:
+                st.error(f"Prediction failed: {e}")
