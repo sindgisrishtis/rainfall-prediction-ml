@@ -433,31 +433,38 @@ The application provides the following sections:
 - **📉 Prediction Analysis** — Actual-versus-predicted rainfall and residual analysis.
 - **🌧️ Live Prediction** — Interactive rainfall prediction using the trained XGBoost model.
 
-### Live Prediction Workflow
+```markdown
+## 🌧️ Live Prediction Workflow
 
-The deployed application follows the same feature structure used during model training:
+The application accepts meteorological and recent rainfall inputs and generates an interactive rainfall prediction using the trained XGBoost model.
 
-**User Input**
-
-↓
-
-**Meteorological & Recent Rainfall Features**
-
-↓
-
-**Feature Engineering**
-
-↓
-
-**Trained XGBoost Model**
-
-↓
-
-**Rainfall Prediction**
-
-↓
-
-**Predicted Rainfall Output**
+```text
+User Input
+     ↓
+Relative Humidity
+     ↓
+Soil Wetness
+     ↓
+Dew Point Temperature
+     ↓
+Minimum Air Temperature
+     ↓
+Wind Speed
+     ↓
+Recent Rainfall (1–3 Days)
+     ↓
+Automatic Feature Engineering
+     ↓
+Rolling Rainfall Features
+     ↓
+XGBoost Model
+     ↓
+Predicted Rainfall
+     ↓
+Rainfall Category
+     ↓
+Prediction Result
+```
 
 The trained model is loaded from:
 
