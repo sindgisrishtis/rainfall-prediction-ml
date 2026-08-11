@@ -686,15 +686,18 @@ Potential improvements to the project include:
 
 ## 👩‍💻 Author
 
-**Srishti Sindgi**
+**Srishti S Sindgi**  
+AI & ML Engineer | Data Science | Software Engineering
 
-Machine Learning / Data Science Portfolio Project
+Passionate about building intelligent systems, machine learning solutions, and production-oriented software applications.
 
-### 🔗 Connect
+**GitHub:** [@sindgisrishtis](https://github.com/sindgisrishtis)  
+**LinkedIn:** [LinkedIn Profile](https://www.linkedin.com/in/srishti-s-sindgi/)  
+**Email:** sindgisrishtis@gmail.com
 
-- **GitHub:** [@sindgisrishtis](https://github.com/sindgisrishtis)
-- **Project Repository:** [Rainfall Prediction ML](https://github.com/sindgisrishtis/rainfall-prediction-ml)
-- **Live Application:** [Rainfall Prediction App](https://rainfall-prediction-ml-ydhagf8htgkxur45jbdnwp.streamlit.app)
+---
+
+⭐ If you found this project useful, consider giving the repository a star.
 
 ---
 
