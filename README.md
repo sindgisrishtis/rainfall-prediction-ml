@@ -433,7 +433,7 @@ The application provides the following sections:
 - **📉 Prediction Analysis** — Actual-versus-predicted rainfall and residual analysis.
 - **🌧️ Live Prediction** — Interactive rainfall prediction using the trained XGBoost model.
 
-```markdown
+
 ## 🌧️ Live Prediction Workflow
 
 The application accepts meteorological and recent rainfall inputs and generates an interactive rainfall prediction using the trained XGBoost model.
