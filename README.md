@@ -1,67 +1,84 @@
 # 🌧️ Rainfall Prediction Using Machine Learning
 
-An end-to-end machine learning project for predicting daily rainfall using historical meteorological data, temporal feature engineering, multiple regression models, error analysis, and an interactive Streamlit web application.
-
-The project covers the complete machine learning workflow — from data preprocessing and exploratory data analysis to model training, evaluation, model serialization, deployment, and live rainfall prediction.
+<p align="center">
+  <strong>End-to-end machine learning system for daily rainfall prediction using meteorological data, temporal feature engineering, XGBoost, and Streamlit.</strong>
+</p>
 
 <p align="center">
-  <a href="https://rainfall-prediction-ml-ydhagf8htgkxur45jbdnwp.streamlit.app">
-    <img src="https://img.shields.io/badge/Live%20Demo-Streamlit-FF4B4B?logo=streamlit&logoColor=white" alt="Live Demo">
-  </a>
-  <a href="https://github.com/sindgisrishtis/rainfall-prediction-ml">
-    <img src="https://img.shields.io/badge/GitHub-Repository-181717?logo=github&logoColor=white" alt="GitHub Repository">
-  </a>
-  <img src="https://img.shields.io/badge/Python-3.11-3776AB?logo=python&logoColor=white" alt="Python">
-  <img src="https://img.shields.io/badge/Model-XGBoost-orange" alt="XGBoost">
-  <img src="https://img.shields.io/badge/Deployment-Streamlit-FF4B4B?logo=streamlit&logoColor=white" alt="Streamlit">
+  <img src="https://img.shields.io/badge/Python-3.11-3776AB?style=flat-square&logo=python&logoColor=white" alt="Python">
+  <img src="https://img.shields.io/badge/Scikit--learn-Machine%20Learning-F7931E?style=flat-square&logo=scikit-learn&logoColor=white" alt="Scikit-learn">
+  <img src="https://img.shields.io/badge/XGBoost-Regression-FF6600?style=flat-square" alt="XGBoost">
+  <img src="https://img.shields.io/badge/Streamlit-Deployed-FF4B4B?style=flat-square&logo=streamlit&logoColor=white" alt="Streamlit">
+  <img src="https://img.shields.io/badge/Status-Live-success?style=flat-square" alt="Status">
 </p>
 
 ---
 
 ## 🚀 Live Demo
 
-🌐 **[Open the Rainfall Prediction App](https://rainfall-prediction-ml-ydhagf8htgkxur45jbdnwp.streamlit.app)**
+🌧️ **[Open the Live Rainfall Prediction Application](https://rainfall-prediction-ml-ydhagf8htgkxur45jbdnwp.streamlit.app)**
 
-💻 **[View the GitHub Repository](https://github.com/sindgisrishtis/rainfall-prediction-ml)**
-
----
-
-## 📌 Project Overview
-
-Rainfall prediction is a regression problem where meteorological observations and historical rainfall patterns are used to estimate rainfall amounts.
-
-This project uses daily meteorological data and machine learning techniques to learn relationships between weather conditions, recent rainfall patterns, and rainfall amounts.
-
-### Key Components
-
-- Data preprocessing and validation
-- Exploratory Data Analysis (EDA)
-- Rainfall seasonality analysis
-- Temporal feature engineering
-- Rainfall lag features
-- Rolling rainfall features
-- Time-aware train/test splitting
-- Multiple regression models
-- Model evaluation using R², RMSE, MAE, and MSE
-- Feature importance analysis
-- Residual/error analysis
-- XGBoost model selection
-- Model serialization using Joblib
-- Interactive Streamlit application
-- Cloud deployment
+💻 **[View the Source Code on GitHub](https://github.com/sindgisrishtis/rainfall-prediction-ml)**
 
 ---
 
-## 🎯 Objectives
+## Overview
 
-The main objectives of this project are:
+**Rainfall Prediction Using Machine Learning** is an end-to-end regression project that predicts daily rainfall from historical meteorological observations and recent rainfall patterns.
 
-1. Clean and prepare historical meteorological data.
-2. Identify rainfall trends and seasonal patterns.
-3. Engineer temporal and rainfall-history features.
-4. Train and compare multiple machine learning regression models.
-5. Evaluate models using appropriate regression metrics.
-6. Select the best-performing model based on test-set performance.
+The project combines **data preprocessing, exploratory data analysis, temporal feature engineering, time-aware model evaluation, ensemble learning, error analysis, and model deployment** into a complete machine learning workflow.
+
+Multiple regression algorithms were trained and evaluated, including:
+
+- Decision Tree
+- Random Forest
+- Support Vector Regression (SVR)
+- XGBoost
+
+Among the evaluated models, **XGBoost achieved the best test-set performance with an R² score of 0.9275**, making it the selected model for the deployed prediction application.
+
+The trained model is serialized using Joblib and integrated into a **Streamlit web application** for interactive rainfall prediction.
+
+---
+
+## 🎯 Key Highlights
+
+- 📊 Daily meteorological rainfall prediction
+- 🧹 Data cleaning and preprocessing
+- 🔎 Exploratory Data Analysis (EDA)
+- 🧠 Temporal and rainfall-history feature engineering
+- ⏳ Time-aware train/test splitting
+- 🤖 Comparison of four machine learning regression models
+- 🏆 XGBoost selected as the final model
+- 📈 R², RMSE, MAE, and MSE evaluation
+- 🔍 Feature importance analysis
+- 📉 Residual and prediction error analysis
+- 💾 Serialized trained model using Joblib
+- 🌐 Interactive Streamlit application
+- 🚀 Live cloud deployment
+- 📁 Structured, reproducible project repository
+
+---
+
+## 📌 Problem Statement
+
+Rainfall is influenced by multiple atmospheric and environmental factors, making accurate rainfall prediction a challenging regression problem.
+
+The objective of this project is to build a machine learning model capable of learning relationships between meteorological conditions and recent rainfall behavior in order to estimate daily rainfall.
+
+The project specifically investigates whether combining **meteorological variables with lagged and rolling rainfall features** can improve predictive performance.
+
+---
+
+## 🎯 Project Objectives
+
+1. Prepare and clean historical meteorological data.
+2. Analyze rainfall distributions, trends, and seasonal behavior.
+3. Engineer meaningful temporal and rainfall-history features.
+4. Train multiple regression-based machine learning models.
+5. Evaluate model performance using appropriate regression metrics.
+6. Compare models using an unseen test set.
 7. Analyze feature importance and prediction errors.
-8. Build an interactive rainfall prediction application.
-9. Deploy the application for browser-based inference.
+8. Select the strongest-performing model.
+9. Serialize the final model for inference.
+10. Build and deploy an interactive rainfall prediction application.
